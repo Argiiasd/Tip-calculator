@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Card from "./components/card";
 import GroupsIcon from "@mui/icons-material/Groups";
 import PaidIcon from "@mui/icons-material/Paid";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import "./App.css";
 
 function App() {
@@ -9,6 +11,7 @@ function App() {
   const [numberOfPeopleInput, setNumberOfPeopleInput] = useState();
   const [numberOfPeople, setNumberOfPeople] = useState();
   const [result, setResult] = useState(0);
+  const [showDetail, setShowDetail] = useState(false);
 
   const calculatePayment = () => {
     if (totalAmount > 0 && numberOfPeopleInput > 0) {
@@ -24,6 +27,10 @@ function App() {
     if (e.target.name === "numberOfPeople") {
       setNumberOfPeopleInput(parseInt(e.target.value));
     }
+  };
+
+  const handleDetails = () => {
+    setShowDetail(!showDetail);
   };
 
   const reset = () => {
@@ -96,13 +103,35 @@ function App() {
           Reset
         </button>
 
+        {result > 0 ? (
+          <button
+            className="bg-black flex justify-center text-white py-2 px-4 rounded border"
+            onClick={handleDetails}
+          >
+            {showDetail ? (
+              <>
+                Hide Detail <KeyboardArrowUpIcon />
+              </>
+            ) : (
+              <>
+                Show Detail <KeyboardArrowDownIcon />
+              </>
+            )}
+          </button>
+        ) : (
+          <></>
+        )}
+
         <div>
-          {result > 0 ? (
-            <div className="flex flex-row flex-wrap gap-5 justify-between">
-              {Array.from({ length: numberOfPeople }).map((_, i) => (
-                <Card key={i} number={i + 1} result={result} />
-              ))}
-            </div>
+          {result > 0 && showDetail === true ? (
+            <>
+              <p className="font-bold text-lg">Details</p>
+              <div className="flex flex-row flex-wrap gap-5 justify-between">
+                {Array.from({ length: numberOfPeople }).map((_, i) => (
+                  <Card key={i} number={i + 1} result={result} />
+                ))}
+              </div>
+            </>
           ) : (
             <></>
           )}
