@@ -35,7 +35,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="text-3xl text-white font-bold mt-8">Pay Divider</h1>
+      <h1 className="text-3xl text-white font-bold mt-8">SplitWise</h1>
 
       <div className="flex flex-col w-3/4 bg-black bg-opacity-75 rounded-lg p-4 border shadow-lg text-white gap-3">
         <div className="flex flex-col mb-8">
