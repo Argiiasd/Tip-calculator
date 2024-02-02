@@ -8,8 +8,8 @@ import "./App.css";
 
 function App() {
   const [totalAmount, setTotalAmount] = useState();
-  const [numberOfPeopleInput, setNumberOfPeopleInput] = useState();
-  const [numberOfPeople, setNumberOfPeople] = useState();
+  const [numberOfPeopleInput, setNumberOfPeopleInput] = useState("");
+  const [numberOfPeople, setNumberOfPeople] = useState("");
   const [result, setResult] = useState(0);
   const [showDetail, setShowDetail] = useState(false);
 
@@ -34,15 +34,20 @@ function App() {
   };
 
   const reset = () => {
-    setTotalAmount(0);
-    setNumberOfPeopleInput(0);
-    setNumberOfPeople(0);
+    setTotalAmount("");
+    setNumberOfPeopleInput("");
+    setNumberOfPeople("");
     setResult(0);
   };
 
   return (
     <div className="App">
       <h1 className="text-3xl text-white font-bold mt-8">SplitWise</h1>
+      <p className="text-white w-3/4 bg-black bg-opacity-75 rounded-lg p-4">
+        ¿Have you ever wondered how to simplify the division of expenses between
+        friends, housemates or colleagues? SplitWise is the answer! Our app is
+        designed to make splitting expenses easy, fast and hassle-free.
+      </p>
 
       <div className="flex flex-col w-3/4 bg-black bg-opacity-75 rounded-lg p-4 border shadow-lg text-white gap-3">
         <div className="flex flex-col mb-8">
@@ -92,8 +97,10 @@ function App() {
       <div className="flex flex-col w-3/4 bg-black bg-opacity-75 rounded-lg p-4 border shadow-lg text-white gap-3">
         <p className="font-bold text-lg">Payment Per Person</p>
 
-        <div className="flex flex-col items-center">
-          <p className="text-xl font-bold">${result.toFixed(2)}</p>
+        <div className="flex flex-col items-center mb-4">
+          <p className="text-3xl font-bold ">
+            ${new Intl.NumberFormat().format(result.toFixed(2))}
+          </p>
         </div>
 
         <button
@@ -137,6 +144,14 @@ function App() {
           )}
         </div>
       </div>
+
+      <footer className="w-full flex justify-center bg-red-500 ">
+        <div className="w-3/4 h-32 bg-black p-4 rounded-t-xl">
+          <p className="text-white text-center">
+            Copyright &copy; {new Date().getFullYear()} SplitWise. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
